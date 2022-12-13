@@ -14,7 +14,7 @@ def main():
    ID =lines[0]
    service = get_calendar_service()
    
-   ICSFile = open('E:\\Scripts\\Python\\SyncCalendar\\temp\\Calendar.ics', 'rb')
+   ICSFile = open(os.path.join(sys.path[0]) +os.sep+ 'temp'+ os.sep +'Calendar.ics', 'rb')
    ICSCalendar = icalendar.Calendar.from_ical(ICSFile.read())
    for component in ICSCalendar.walk():
        
