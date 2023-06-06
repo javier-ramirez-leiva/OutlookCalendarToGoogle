@@ -24,12 +24,13 @@ def main():
          summary = component.get('summary')
          start = vDatetime.from_ical(noFormatStart.to_ical())
          end = vDatetime.from_ical(noFormatEnd.to_ical())
-         print("Import event: ", summary, start, end)
+         timeZone = 'Europe/Paris'
+         print("Import event: ", summary, start, end,noFormatStart.dt.tzinfo)
          event_result = service.events().insert(calendarId=ID,
          body={
           "summary": summary,
-          "start": {"dateTime": start.isoformat(), "timeZone": 'Europe/Paris'},
-          "end": {"dateTime": end.isoformat(), "timeZone": 'Europe/Paris'},
+          "start": {"dateTime": start.isoformat(), "timeZone": str(noFormatStart.dt.tzinfo)},
+          "end": {"dateTime": end.isoformat(), "timeZone": str(noFormatEnd.dt.tzinfo)},
          },).execute()
        
    
@@ -37,4 +38,5 @@ def main():
 
 
 if __name__ == '__main__':
+
    main()
